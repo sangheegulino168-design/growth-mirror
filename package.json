@@ -1,0 +1,12 @@
+{
+  "name": "growth-mirror-desktop-build",
+  "private": true,
+  "version": "0.2.0",
+  "scripts": {
+    "tauri": "tauri",
+    "desktop:build": "tauri build"
+  },
+  "devDependencies": {
+    "@tauri-apps/cli": "2.11.1"
+  }
+}

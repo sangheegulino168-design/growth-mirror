@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "growth-mirror"
+version = "0.2.0"
+description = "A safe, explainable cognitive core for an AI-child growth simulation."
+requires-python = ">=3.10"
+
+[project.optional-dependencies]
+api = ["fastapi", "uvicorn[standard]"]
+desktop-build = ["pyinstaller>=6.0"]
+
+[project.scripts]
+growth-mirror-service = "growth_mirror.sidecar:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+growth_mirror = ["web/*"]

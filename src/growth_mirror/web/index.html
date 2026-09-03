@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>成长镜</title>
+    <link rel="stylesheet" href="styles.css?v=0.2.0" />
+  </head>
+  <body>
+    <div class="shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow" data-i18n="brandEyebrow">GROWTH MIRROR · 本地原型</p>
+          <h1 data-i18n="brandName">成长镜</h1>
+        </div>
+        <div class="top-actions">
+          <div class="language-switch" aria-label="语言" data-i18n-aria-label="languageLabel"><button class="lang-button active" data-lang="zh-CN">中</button><button class="lang-button" data-lang="en">EN</button></div>
+          <div class="status"><span id="statusDot"></span><span id="serviceStatus" data-i18n="connecting">正在连接本地服务</span></div>
+        </div>
+      </header>
+
+      <section class="notice">
+        <strong data-i18n="noticeTitle">这是成长模拟，不是真实儿童或心理诊断。</strong>
+        <span data-i18n="noticeBody">角色的情绪表达由程序生成；你可以暂停、跳过问题或删除本地数据。</span>
+      </section>
+
+      <main id="onboarding" class="onboarding panel">
+        <div class="seed-orbit" aria-hidden="true"><span>芽</span></div>
+        <div>
+          <p class="eyebrow" data-i18n="firstMeeting">第一次见面</p>
+          <h2 data-i18n="onboardingTitle">它拥有语言，但还没有属于自己的过去。</h2>
+          <p class="muted" data-i18n="onboardingBody">你不能选择一个完美孩子，只能给它一个名字，然后在相处中慢慢认识彼此。</p>
+          <form id="createForm" class="create-form">
+            <label><span data-i18n="name">名字</span><input id="childName" maxlength="40" placeholder="例如：小芽" data-i18n-placeholder="namePlaceholder" required /></label>
+            <label><span data-i18n="initialAge">初始年龄</span><input id="initialAge" type="number" min="0" max="35" value="4" required /></label>
+            <label><span data-i18n="seed">成长种子</span><input id="seed" type="number" value="42" required /></label>
+            <button type="submit" data-i18n="begin">开始相遇</button>
+          </form>
+        </div>
+      </main>
+
+      <main id="workspace" class="workspace hidden">
+        <nav class="tabs" aria-label="功能导航" data-i18n-aria-label="navLabel">
+          <button class="tab active" data-tab="conversation" data-i18n="tabCare">陪伴</button>
+          <button class="tab" data-tab="context" data-i18n="tabContext">生活事件</button>
+          <button class="tab" data-tab="growth" data-i18n="tabGrowth">成长档案</button>
+        </nav>
+
+        <section id="conversation" class="tab-page active-page">
+          <div class="identity panel">
+            <div class="avatar">芽</div>
+            <div><p class="eyebrow" data-i18n="growing">正在成长</p><h2 id="displayName">—</h2><p id="stageLabel" class="muted">初生自我</p></div>
+            <div class="identity-stats"><span><i data-i18n="age">年龄</i><b id="ageValue">—</b></span><span><i data-i18n="sharedEvents">共同经历</i><b id="eventCount">0</b></span><span><i data-i18n="lifeEvents">生活事件</i><b id="contextCount">0</b></span><button id="advanceAge" class="secondary compact" type="button" data-i18n="growOneYear">长大一岁</button></div>
+          </div>
+          <article class="scenario-card panel">
+            <div class="scenario-heading">
+              <div><p id="scenarioChapter" class="eyebrow">生活片段</p><h2 id="scenarioTitle">—</h2></div>
+              <button id="nextScenario" class="secondary compact" type="button" data-i18n="changeEvent">换一个事件</button>
+            </div>
+            <p id="scenarioBody" class="scenario-body"></p>
+            <blockquote id="scenarioSpeech"></blockquote>
+            <div class="perspective-row">
+              <span data-i18n="responseAngles">如果一时不知道怎么说，可以从这些角度开始：</span>
+              <button class="prompt-chip" type="button" data-prompt-index="0"></button>
+              <button class="prompt-chip" type="button" data-prompt-index="1"></button>
+              <button class="prompt-chip" type="button" data-prompt-index="2"></button>
+            </div>
+          </article>
+          <div id="messages" class="messages panel" aria-live="polite">
+            <div id="initialMessage" class="message system" data-i18n="initialMessage">请阅读上面的事件，然后用你真实会采用的方式回应。这里没有标准答案。</div>
+          </div>
+          <form id="chatForm" class="chat-box">
+            <label class="response-label" for="chatInput" data-i18n="yourResponse">你会怎样回应孩子？</label>
+            <textarea id="chatInput" rows="3" maxlength="10000" placeholder="写下你此刻会说的话或采取的行动……" data-i18n-placeholder="chatPlaceholder" required></textarea>
+            <div><label class="check"><input id="disclosure" type="checkbox" checked /><span data-i18n="showDisclosure">显示模拟角色提示</span></label><button type="submit" data-i18n="send">回应这件事</button></div>
+          </form>
+        </section>
+
+        <section id="context" class="tab-page">
+          <div class="panel narrow">
+            <p class="eyebrow" data-i18n="multiFactor">多因素成长</p>
+            <h2 data-i18n="contextTitle">记录一次生活环境变化</h2>
+            <p class="muted" data-i18n="contextBody">家庭、学校、同伴、升学、工作和公共事件会与养育方式共同影响成长，但不会被当成确定原因。</p>
+            <form id="contextForm" class="stack-form">
+              <label><span data-i18n="eventType">事件类型</span>
+                <select id="contextType">
+                  <option value="exam" data-i18n="typeExam">升学或考试压力</option>
+                  <option value="school_support" data-i18n="typeSchool">学校或老师支持</option>
+                  <option value="peer" data-i18n="typePeer">同伴接纳或排斥</option>
+                  <option value="family" data-i18n="typeFamily">家庭环境变化</option>
+                  <option value="work" data-i18n="typeWork">求职或工作变化</option>
+                  <option value="public_health" data-i18n="typeHealth">疫情等公共卫生事件</option>
+                  <option value="values" data-i18n="typeValues">文化或公共价值教育</option>
+                </select>
+              </label>
+              <label><span data-i18n="whatHappened">发生了什么</span><textarea id="contextDescription" rows="4" required></textarea></label>
+              <label><span data-i18n="intensity">影响强度</span><input id="contextIntensity" type="range" min="0" max="1" step="0.1" value="0.5" /><output id="intensityOutput" data-i18n="medium">中等</output></label>
+              <label id="valueMessageWrap" class="hidden"><span data-i18n="valueMessage">接触到的具体价值观点</span><input id="valueMessage" maxlength="500" /></label>
+              <button type="submit" data-i18n="recordContext">记入成长环境</button>
+            </form>
+            <p id="contextResult" class="result"></p>
+          </div>
+        </section>
+
+        <section id="growth" class="tab-page">
+          <div class="growth-grid">
+            <article class="panel"><p class="eyebrow" data-i18n="internalState">内部成长状态</p><h2 data-i18n="currentTendencies">当前倾向</h2><div id="traitBars" class="trait-bars"></div></article>
+            <article class="panel"><p class="eyebrow" data-i18n="relationshipContext">关系与环境</p><h2 data-i18n="notSingleCause">不是单一归因</h2><div id="contextBars" class="trait-bars"></div></article>
+          </div>
+          <article class="panel report-panel"><div><p class="eyebrow" data-i18n="mirrorReport">镜像报告</p><h2 data-i18n="reportTitle">观察、证据与多种解释</h2></div><button id="refreshReport" class="secondary" data-i18n="refresh">刷新报告</button><div id="reportContent" class="report-content muted" data-i18n="insufficientInitial">互动证据不足时，系统不会给你贴标签。</div></article>
+          <article class="panel data-rights">
+            <div><p class="eyebrow" data-i18n="dataRights">你的数据权利</p><h2 data-i18n="dataRightsTitle">导出或永久删除本地成长记录</h2><p class="muted" data-i18n="dataRightsBody">导出文件包含成长状态、事件证据和安全审计。删除会清除这个孩子的事件、索引、快照和审计记录，且无法撤销。</p></div>
+            <div class="data-actions"><button id="exportData" class="secondary" data-i18n="exportData">导出 JSON</button><button id="deleteData" class="danger" data-i18n="deleteData">永久删除</button><p id="dataResult" class="result" aria-live="polite"></p></div>
+          </article>
+        </section>
+      </main>
+    </div>
+    <div id="deleteDialog" class="dialog-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="deleteDialogTitle">
+      <section class="delete-dialog panel">
+        <p class="eyebrow" data-i18n="deleteData">永久删除</p>
+        <h2 id="deleteDialogTitle" data-i18n="deleteDialogTitle">确认删除这个孩子的全部记录</h2>
+        <p class="muted" data-i18n="deleteFinal">这会永久删除全部本地成长记录，无法撤销。确定继续吗？</p>
+        <label><span data-i18n="deleteNameLabel">输入孩子的名字</span><input id="deleteConfirmation" maxlength="40" autocomplete="off" /></label>
+        <p id="deleteError" class="error-text" aria-live="polite"></p>
+        <div class="dialog-actions"><button id="cancelDelete" class="secondary" data-i18n="cancel">取消</button><button id="confirmDelete" class="danger" data-i18n="confirmDelete">确认永久删除</button></div>
+      </section>
+    </div>
+    <script src="app.js?v=0.2.0" defer></script>
+  </body>
+</html>

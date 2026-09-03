@@ -1,0 +1,31 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "Growth Mirror",
+  "version": "0.2.0",
+  "identifier": "com.growthmirror.desktop",
+  "build": {
+    "frontendDist": "../src/growth_mirror/web"
+  },
+  "app": {
+    "windows": [
+      {
+        "title": "成长镜",
+        "width": 1180,
+        "height": 820,
+        "minWidth": 860,
+        "minHeight": 640,
+        "resizable": true,
+        "fullscreen": false
+      }
+    ],
+    "security": {
+      "csp": "default-src 'self'; img-src 'self' asset: data:; style-src 'self' 'unsafe-inline'; script-src 'self'; connect-src 'self' http://127.0.0.1:8765"
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": ["nsis"],
+    "icon": ["icons/icon.ico", "icons/icon.png"],
+    "externalBin": ["binaries/growth-mirror-service"]
+  }
+}
