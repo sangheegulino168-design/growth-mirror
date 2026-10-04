@@ -34,7 +34,9 @@ Growth Mirror is a bilingual, local-first AI-child growth simulation. It models 
 
 ## 安装体验版
 
-Windows 10/11 x64 可运行 `dist/Growth-Mirror-0.2.0-Windows-x64-Setup.exe`。当前测试包没有商业代码签名，Windows 可能显示未知发布者提示；正式内测发布前应购买或配置代码签名证书。
+Windows 10/11 x64 可从 [GitHub Releases 下载 Growth Mirror v0.2.0 安装程序](https://github.com/sangheegulino168-design/growth-mirror/releases/download/v0.2.0/Growth-Mirror-0.2.0-Windows-x64-Setup.exe)，也可在源码包中使用 `dist/Growth-Mirror-0.2.0-Windows-x64-Setup.exe`。当前测试包没有商业代码签名，Windows 可能显示未知发布者提示；正式内测发布前应购买或配置代码签名证书。
+
+安装包 SHA-256：`D46F7BA43879C77985E3C0E8137EDCACD50C95D78BF3BC10CE51344B4A7B5426`
 
 安装后直接打开“Growth Mirror”即可。本地服务会随桌面程序启动和退出，成长数据默认保存在 `%LOCALAPPDATA%\GrowthMirror\growth_mirror.db`，升级应用不会覆盖该数据库。
 
